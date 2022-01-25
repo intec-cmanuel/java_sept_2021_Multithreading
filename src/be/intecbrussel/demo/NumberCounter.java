@@ -4,7 +4,32 @@ import java.util.Scanner;
 
 public class NumberCounter {
     private static int counter;
-    private Object monitorObject = new Object();
+    private static int counter2;
+    private final Object monitorObject = new Object();
+    private final Object secondMonitorObject = new Object();
+
+    public void incrementBothCounters() {
+        synchronized (monitorObject) {
+            counter++;
+
+            synchronized (secondMonitorObject) {
+                counter2++;
+            }
+        }
+
+    }
+
+    public void decrementBothCounters() {
+        synchronized (monitorObject) {
+            counter--;
+
+            synchronized (secondMonitorObject) {
+                counter2--;
+            }
+        }
+
+
+    }
 
     public void increment() {
         synchronized (monitorObject) {
@@ -12,13 +37,15 @@ public class NumberCounter {
         }
     }
 
-    public synchronized void decrement() {
+    public void decrement() {
+        synchronized (monitorObject) {
             counter--;
+        }
     }
 
     @Override
     public String toString() {
-        return "counter is at: " + counter;
+        return "counter1 : " + counter + " | counter2 : " + counter2;
     }
 }
 

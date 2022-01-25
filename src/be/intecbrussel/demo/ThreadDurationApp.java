@@ -13,7 +13,10 @@ public class ThreadDurationApp {
         beforeRunning = LocalTime.now();
         thread.start();
 
-        while(thread.getState() != Thread.State.TERMINATED){
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         afterRunning = LocalTime.now();
