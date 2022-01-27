@@ -3,7 +3,7 @@ package be.intecbrussel.demo;
 import java.util.Scanner;
 
 public class NumberCounter {
-    private static int counter;
+    private int counter;
     private static int counter2;
     private final Object monitorObject = new Object();
     private final Object secondMonitorObject = new Object();
@@ -32,9 +32,7 @@ public class NumberCounter {
     }
 
     public void increment() {
-        synchronized (monitorObject) {
             counter++;
-        }
     }
 
     public void decrement() {
